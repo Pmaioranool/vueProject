@@ -1,5 +1,5 @@
 <template>
-  <HeaderLayout />
+  <HeaderLayout :is-logging-in="false" />
   <router-view></router-view>
 </template>
 <script setup lang="ts">

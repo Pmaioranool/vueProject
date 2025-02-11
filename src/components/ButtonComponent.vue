@@ -1,5 +1,5 @@
 <template>
-  <button :type="data.type ? data.type : 'button'" id="id">
+  <button :type="data.type ? data.type : 'button'" :id="String(data.id)">
     {{ data.textContent }}
   </button>
 </template>
