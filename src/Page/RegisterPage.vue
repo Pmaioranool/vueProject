@@ -1,5 +1,6 @@
 <template>
   <HeaderLayout :data="Header" />
+
   <h1>Login page</h1>
   <main>
     <section>
@@ -39,12 +40,17 @@ const fields = [
     type: "password",
     placeholder: "Password",
   },
+  {
+    id: "confirmPassword",
+    type: "password",
+    placeholder: "Confirm Password",
+  },
 ];
 
 const buttons = [
   {
-    id: "login",
-    textContent: "Login",
+    id: "register",
+    textContent: "inscription",
     type: "submit" as "submit",
   },
   {
@@ -55,8 +61,8 @@ const buttons = [
 ];
 
 const Header = {
-  link: "/register",
-  nom: "inscription",
+  link: "/login",
+  nom: "login",
 };
 </script>
 <style></style>

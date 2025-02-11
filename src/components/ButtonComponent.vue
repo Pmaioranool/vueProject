@@ -1,5 +1,5 @@
 <template>
-  <button :type="data.type ? data.type : 'button'" :id="String(data.id)">
+  <button :type="data.type ? data.type : 'button'" id="id">
     {{ data.textContent }}
   </button>
 </template>
@@ -7,7 +7,7 @@
 interface dataInterface {
   id: string | number;
   textContent: string;
-  type?: "submit" | "reset" | "button";
+  type: "button" | "submit" | "reset";
 }
 
 interface ButtonComponentProps {

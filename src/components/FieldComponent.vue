@@ -2,6 +2,7 @@
   <article>
     <label :for="String(data.id)"></label>
     <input
+      class="input"
       :type="data.type ? data.type : 'text'"
       :id="String(data.id)"
       :placeholder="data.placeholder"
