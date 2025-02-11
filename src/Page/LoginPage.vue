@@ -1,5 +1,4 @@
 <template>
-  <HeaderLayout :data="Header" />
   <h1>Login page</h1>
   <main>
     <section>
@@ -26,7 +25,6 @@
 <script setup lang="ts">
 import FieldComponent from "../components/FieldComponent.vue";
 import ButtonComponent from "../components/ButtonComponent.vue";
-import HeaderLayout from "../Layout/HeaderLayout.vue";
 
 const fields = [
   {
@@ -53,10 +51,5 @@ const buttons = [
     type: "reset" as "reset",
   },
 ];
-
-const Header = {
-  link: "/register",
-  nom: "inscription",
-};
 </script>
 <style></style>
