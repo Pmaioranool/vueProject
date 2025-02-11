@@ -10,8 +10,8 @@
   </header>
 </template>
 <script setup lang="ts">
-const invertLogin = (isLoggingIn) => !isLoggingIn;
-invertLogin(true);
+// const invertLogin = (isLoggingIn) => !isLoggingIn;
+// invertLogin(true);
 interface Props {
   isLoggingIn: boolean;
 }
