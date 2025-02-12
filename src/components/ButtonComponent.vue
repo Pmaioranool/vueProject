@@ -1,9 +1,9 @@
 <template>
   <button
+    :class="data.class"
     :type="data.type ? data.type : 'button'"
     :id="String(data.id)"
     :disabled="data.disabled ? data.disabled : false"
-    :v-model="data.id"
   >
     {{ data.textContent }}
   </button>
@@ -14,6 +14,7 @@ interface dataInterface {
   textContent: string;
   type: "button" | "submit" | "reset";
   disabled: boolean;
+  class: string;
 }
 
 interface ButtonComponentProps {

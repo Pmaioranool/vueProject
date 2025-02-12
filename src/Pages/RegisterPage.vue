@@ -2,7 +2,7 @@
   <h1>Login page</h1>
   <main>
     <section>
-      <form>
+      <form @submit.prevent.once="submitHandler">
         <section>
           <FieldComponent
             v-for="field in fields"
@@ -12,7 +12,6 @@
         </section>
         <section>
           <ButtonComponent
-            class="button"
             v-for="button in buttons"
             :key="button.id"
             :data="button"
@@ -49,12 +48,18 @@ const buttons = [
     id: "register",
     textContent: "inscription",
     type: "submit" as "submit",
+    disabled: false,
+    class: "button is-dark",
   },
   {
     id: "reset",
     textContent: "Reset",
     type: "reset" as "reset",
+    disabled: false,
+    class: "button is-danger is-dark",
   },
 ];
+
+const submitHandler = () => {};
 </script>
 <style></style>

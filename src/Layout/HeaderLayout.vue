@@ -4,7 +4,7 @@
       <router-link
         class="button is-link is-soft"
         :to="isLoggingIn ? '/register' : '/login'"
-        >{{ isLoggingIn ? "inscription" : "connexion" }}</router-link
+        >{{ isLoggingIn ? "register" : "login" }}</router-link
       >
     </nav>
   </header>
