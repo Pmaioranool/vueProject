@@ -2,7 +2,7 @@
   <h1>Login page</h1>
   <main>
     <section>
-      <form @submit.prevent.once="submitHandler">
+      <form @submit.prevent="submitHandler">
         <!-- <section>
           <FieldComponent
             v-for="field in fields"
@@ -18,9 +18,9 @@
             ><input
               class="input"
               type="text"
-              id="username"
-              placeholder="username"
-              v-model="logUser.username"
+              id="email"
+              placeholder="email"
+              v-model="email"
               style=""
             />
           </article>
@@ -31,7 +31,7 @@
               type="password"
               id="password"
               placeholder="Password"
-              v-model="logUser.password"
+              v-model="password"
               style=""
             />
           </article>
@@ -48,36 +48,35 @@
   </main>
 </template>
 <script setup lang="ts">
-import FieldComponent from "../components/FieldComponent.vue";
+// import FieldComponent from "../components/FieldComponent.vue";
 import ButtonComponent from "../components/ButtonComponent.vue";
-import { reactive, watch } from "vue";
+import { reactive, watch, ref } from "vue";
+import validator from "../utils/input-validator";
+import { useRouter } from "vue-router";
 
-const logUser = reactive({
-  username: "",
-  password: "",
-});
+const router = useRouter();
 
-const fields = [
-  {
-    id: "username",
-    type: "text",
-    placeholder: "username",
-    vModel: logUser.username,
-  },
-  {
-    id: "password",
-    type: "password",
-    placeholder: "Password",
-    vModel: logUser.password,
-  },
-];
+// const fields = [
+//   {
+//     id: "username",
+//     type: "text",
+//     placeholder: "username",
+//     vModel: logUser.username,
+//   },
+//   {
+//     id: "password",
+//     type: "password",
+//     placeholder: "Password",
+//     vModel: logUser.password,
+//   },
+// ];
 
 const buttons = [
   {
     id: "login",
     textContent: "Login",
     type: "submit" as "submit",
-    disabled: true,
+    disabled: false, // / !logUser.username || !logUser.password, a faire
     class: "button is-dark",
   },
   {
@@ -89,21 +88,44 @@ const buttons = [
   },
 ];
 
-const submitHandler = () => {};
+// const logUser = reactive({
+//   email: "",
+//   password: "",
+// });
+
+const email = ref("");
+const password = ref("");
+
+const submitHandler = async () => {
+  const result = await fetch("user.json");
+  const users = await result.json();
+
+  const user = users.find(
+    (user: { email: string; password: string }) => user.email === email.value
+  );
+  if (!user) {
+    alert("User not found");
+    return;
+  }
+  if (!(user.password === password.value)) {
+    alert("incorrect password");
+  }
+
+  console.log("User found", user);
+};
 
 const inputHandler = () => {};
 
-const isUserInputValid = (email: string, password: string): boolean => {
-  const emailPattern = new RegExp(/[A-Z0-9._%+-]+@[A-Z0-9-]+.+.[A-Z]{2,4}/i);
-  const passwordPattern = new RegExp(
-    /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[#^$@$!%*?&_])[A-Za-z\d#^$@$!%*?&_]{8,100}$/
-  );
-  const emailTest = emailPattern.test(email);
-  const passwordTest = passwordPattern.test(password);
-  return emailTest && passwordTest;
-};
+inputHandler();
 
-watch(logUser, (val) => {
-  console.log(isUserInputValid(val.username, val.password));
+const isEmailValid = reactive({ value: false });
+const isPasswordValid = reactive({ value: false });
+
+watch(email, (newVal) => {
+  console.log(validator(newVal, "email"));
+});
+
+watch(password, (newVal) => {
+  console.log(validator(newVal, "password"));
 });
 </script>
