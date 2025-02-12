@@ -93,13 +93,17 @@ const submitHandler = () => {};
 
 const inputHandler = () => {};
 
-const isUserInputValid = (input: string): boolean => {
-  const pattern = new RegExp(/[A-Z0-9._%+-]+@[A-Z0-9-]+.+.[A-Z]{2,4}/i);
-  return pattern.test(input);
+const isUserInputValid = (email: string, password: string): boolean => {
+  const emailPattern = new RegExp(/[A-Z0-9._%+-]+@[A-Z0-9-]+.+.[A-Z]{2,4}/i);
+  const passwordPattern = new RegExp(
+    /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[#^$@$!%*?&_])[A-Za-z\d#^$@$!%*?&_]{8,100}$/
+  );
+  const emailTest = emailPattern.test(email);
+  const passwordTest = passwordPattern.test(password);
+  return emailTest && passwordTest;
 };
 
 watch(logUser, (val) => {
-  console.log(val.username);
-  console.log(isUserInputValid(val.username));
+  console.log(isUserInputValid(val.username, val.password));
 });
 </script>
