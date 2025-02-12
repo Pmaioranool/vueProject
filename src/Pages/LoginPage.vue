@@ -1,6 +1,6 @@
 <template>
   <h1>Login page</h1>
-  <main>
+  <main class="login__main">
     <section>
       <form>
         <section>
@@ -25,12 +25,13 @@
 <script setup lang="ts">
 import FieldComponent from "../components/FieldComponent.vue";
 import ButtonComponent from "../components/ButtonComponent.vue";
+import { reactive, watch } from "vue";
 
 const fields = [
   {
-    id: "email",
-    type: "email",
-    placeholder: "Email",
+    id: "username",
+    type: "text",
+    placeholder: "username",
   },
   {
     id: "password",
@@ -44,12 +45,21 @@ const buttons = [
     id: "login",
     textContent: "Login",
     type: "submit" as "submit",
+    disabled: true,
   },
   {
     id: "reset",
     textContent: "Reset",
     type: "reset" as "reset",
+    disabled: false,
   },
 ];
+
+const state = reactive({ username: "", password: "" });
+
+watch([() => state.username, () => state.password], () => {});
 </script>
-<style></style>
+<style lang="scss" scoped>
+.login__main {
+}
+</style>
