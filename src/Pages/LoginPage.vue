@@ -112,6 +112,7 @@ const submitHandler = async () => {
   }
 
   console.log("User found", user);
+  router.push("/session/" + user.id);
 };
 
 const inputHandler = () => {};
